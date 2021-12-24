@@ -37,7 +37,7 @@ export default function Post({ post }: PostProps) {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <h1>Loading...</h1>;
+    return <h1>Carregando...</h1>;
   }
 
   const totalWords = post.data.content.reduce(
@@ -116,7 +116,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: true };
 };
 
-export const getStaticProps:GetStaticProps = async context => {
+export const getStaticProps: GetStaticProps = async context => {
   const prismic = getPrismicClient();
   const { slug } = context.params;
 
@@ -139,9 +139,9 @@ export const getStaticProps:GetStaticProps = async context => {
     },
   };
 
-  return { 
-    props: { 
-      post 
+  return {
+    props: {
+      post,
     },
   };
 };

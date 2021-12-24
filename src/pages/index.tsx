@@ -1,9 +1,9 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useState } from 'react';
 import Prismic from '@prismicio/client';
 import { FiCalendar, FiUser } from 'react-icons/fi';
-import { format } from 'date-fns';
 
 
 import { getPrismicClient } from '../services/prismic';
@@ -11,6 +11,7 @@ import { getPrismicClient } from '../services/prismic';
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
 import Header from '../components/Header';
+import { formatDate } from '../utils/formatDate';
 
 interface Post {
   uid?: string;
@@ -44,7 +45,7 @@ export default function Home({ postsPagination }: HomeProps) {
 
   const [posts, setPosts] = useState<Post[]>(formatPosts);
 
-  async function handleGetNextPagePost(): Promise<void> {
+  async function handleGetNextPagePosts(): Promise<void> {
     const response = await fetch(pagination);
 
     const data = await response.json();
@@ -87,7 +88,7 @@ export default function Home({ postsPagination }: HomeProps) {
 
         {pagination && (
           <button className={styles.loadMorePosts}
-          onClick={handleGetNextPagePosts}>Load more posts</button>
+          onClick={handleGetNextPagePosts}>Carregar mais posts</button>
         )}
       </section>
     </>
